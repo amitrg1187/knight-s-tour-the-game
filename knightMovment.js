@@ -15,7 +15,7 @@ let stepArrx=[+2,+2,-2,-2,+1,+1,-1,-1];
 let stepArry=[+1,-1,+1,-1,+2,-2,+2,-2];
 let winCount= 0;
 let n= 25;
-
+let timeDelay= 2500;
 let squares= document.querySelectorAll('.btn');
 if (BoardSize==36){
   squares= document.querySelectorAll('.btn6');
@@ -29,7 +29,7 @@ if (BoardSize==36){
  row4= 23;
  row5= 29;
  row6= 35;
-
+timeDelay= 3600;
 }
 // if(BoardSize==36){
 //   arr= [[25,26,27,28,29,30],[31,32,33,34,35,36],[37,38,39,40,41,42],[43,44,45,46,47,48],[49,50,51,52,53,54],[55,56,57,58,59,60]];
@@ -138,10 +138,11 @@ for(let i=0; i<8;){
  if(count==8){
   gameOver()
  }
+
+ if(winCount== winCon){
     win();
 
-//  if(winCount== winCon){
-//  }
+ }
 })})
 
 let clear= ()=>{
@@ -154,16 +155,29 @@ let clear= ()=>{
 let gameOver= ()=>{
   gameO.style.display="flex";
 }
-
+let i=0;
 let win = ()=>{
   gameO.innerHTML="";
   gameO.innerText="YOU WON";
   gameO.style.color="green";
   gameO.style.display="flex";
-   squares.forEach((s)=>{
-    s.setAttribute("id", "celebration" )
-  })
 
+let count = 0;
+let square;
+function incrementCount() {
+  square= squares[count]
+  square.style.backgroundColor="yellow"
+  count++;
+}
+
+// Start the interval, calling incrementCount every 1 second (1000 milliseconds)
+let timerId = setInterval(incrementCount, 100);
+
+// After 5 seconds, stop the interval
+setTimeout(() => {
+  clearInterval(timerId);
+  console.log("Interval stopped.");
+}, timeDelay);
 }
  restartBtn.addEventListener('click' , ()=>{
  
